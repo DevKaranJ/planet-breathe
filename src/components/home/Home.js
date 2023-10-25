@@ -32,9 +32,9 @@ const Home = () => {
       {stockData.data && stockData.data.map((item, index) => (
   <div className="company-card" key={index}>
     <ul className="company-info">
-      <li className="symbol">Symbol: {item.symbol}</li>
-      <li className="name">Company Name: {item.name}</li>
-      <li className="exchange">Exchange: {item.exchangeShortName}</li>
+      <li className="symbol">{item.symbol}</li>
+      <li className="name">{item.name}</li>
+      <li className="exchange">{item.exchangeShortName}</li>
     </ul>
     <div className="button-container">
       <Button type="text" icon={<RightOutlined />} className="view-details-button">
