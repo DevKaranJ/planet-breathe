@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDataStart, fetchDataSuccess, fetchDataFailure } from '../../redux/stockData/stockDataSlice';
 import { fetchStockData } from '../../redux/stockData/stockApi';
 import './home.scss';
+import { Button } from 'antd'; // Import the Button component from Ant Design
+import { RightOutlined } from '@ant-design/icons';
 
 const Home = () => {
   const stockData = useSelector((state) => state.stockData);
@@ -28,13 +30,16 @@ const Home = () => {
       {stockData.loading && <p className="loading">Loading...</p>}
       {stockData.error && <p className="error">Error: {stockData.error.message}</p>}
       {stockData.data && stockData.data.map((item, index) => (
-        <div className="company-card" key={index}> {/* Use the 'company-card' class */}
-          <ul>
-            <li> {item.name}</li>
-            <li> {item.symbol}</li>
-            <li> {item.price}</li>
-          </ul>
-        </div>
+  <div className="company-card" key={index}>
+    <ul>
+      <li>{item.name}</li>
+      <li>{item.symbol}</li>
+      <li>{item.price}</li>
+    </ul>
+    <Button type="primary" icon={<RightOutlined />}>View Details</Button>
+  </div>
+))}
+
       ))}
     </div>
   );
