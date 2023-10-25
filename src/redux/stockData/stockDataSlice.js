@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchStockData } from './stockApi';
 
 const stockDataSlice = createSlice({
   name: 'stockData',
@@ -30,5 +31,17 @@ export const {
   fetchDataSuccess,
   fetchDataFailure,
 } = stockDataSlice.actions;
+
+// New action to fetch details for a specific stock
+export const fetchStockDetail = (symbol) => async (dispatch) => {
+  dispatch(fetchDataStart());
+
+  try {
+    const response = await fetchStockData(symbol); // Modify fetchStockData to accept a symbol parameter
+    dispatch(fetchDataSuccess(response));
+  } catch (error) {
+    dispatch(fetchDataFailure(error));
+  }
+};
 
 export default stockDataSlice.reducer;
