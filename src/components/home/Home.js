@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchDataStart, fetchDataSuccess, fetchDataFailure } from '../../redux/stockData/stockDataSlice';
 import { fetchStockData } from '../../redux/stockData/stockApi';
@@ -27,21 +28,22 @@ const Home = () => {
 
   return (
     <div className="companyContainer">
-      {stockData.loading && <p className="loading">Loading...</p>}
-      {stockData.error && <p className="error">Error: {stockData.error.message}</p>}
+      {/* ... */}
       {stockData.data && stockData.data.map((item, index) => (
-  <div className="company-card" key={index}>
-    <ul className="company-info">
-      <li className="symbol">{item.symbol}</li>
-      <li className="name">{item.name}</li>
-      <li className="exchange">{item.exchangeShortName}</li>
-    </ul>
-    <div className="button-container">
-      <Button type="text" icon={<RightOutlined />} className="view-details-button">
-      </Button>
-    </div>
-  </div>
-))}
+        <div className="company-card" key={index}>
+          <ul className="company-info">
+            <li className="symbol">{item.symbol}</li>
+            <li className="name">{item.name}</li>
+            <li className="exchange">{item.exchangeShortName}</li>
+          </ul>
+          <div className="button-container">
+            <Link to={`/stock/${item.symbol}`}>
+              <Button type="text" icon={<RightOutlined />} className="view-details-button">
+              </Button>
+            </Link>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
