@@ -26,21 +26,22 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="companyContainer"> { }
+    <div className="companyContainer">
       {stockData.loading && <p className="loading">Loading...</p>}
       {stockData.error && <p className="error">Error: {stockData.error.message}</p>}
       {stockData.data && stockData.data.map((item, index) => (
   <div className="company-card" key={index}>
-    <ul>
-      <li>{item.name}</li>
-      <li>{item.symbol}</li>
-      <li>{item.price}</li>
+    <ul className="company-info">
+      <li className="symbol">Symbol: {item.symbol}</li>
+      <li className="name">Company Name: {item.name}</li>
+      <li className="exchange">Exchange: {item.exchangeShortName}</li>
     </ul>
-    <Button type="primary" icon={<RightOutlined />}>View Details</Button>
+    <div className="button-container">
+      <Button type="text" icon={<RightOutlined />} className="view-details-button">
+      </Button>
+    </div>
   </div>
 ))}
-
-      ))}
     </div>
   );
 };
