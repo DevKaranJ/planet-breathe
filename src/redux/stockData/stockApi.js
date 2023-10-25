@@ -5,7 +5,8 @@ const API_KEY = 'TjRFwBPIngDfqC6yB1xBcsY61HwrdcWk';
 const fetchStockData = async (symbol) => {
   try {
     const response = await axios.get(
-      `https://financialmodelingprep.com/api/v3/stock/list?apikey=${API_KEY}`
+      // putting limit to 5 for now 
+      `https://financialmodelingprep.com/api/v3/search?query=AA&limit=50&exchange=NASDAQ&apikey=${API_KEY}`
     );
     return response.data;
   } catch (error) {

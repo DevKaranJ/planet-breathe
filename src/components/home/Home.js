@@ -24,14 +24,16 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-container">
+    <div className="companyContainer"> { }
       {stockData.loading && <p className="loading">Loading...</p>}
       {stockData.error && <p className="error">Error: {stockData.error.message}</p>}
       {stockData.data && stockData.data.map((item, index) => (
-        <div className="card" key={index}>
-          <p>Company: {item.name}</p>
-          <p>Symbol: {item.symbol}</p>
-          <p>Price: {item.price}</p>
+        <div className="company-card" key={index}> {/* Use the 'company-card' class */}
+          <ul>
+            <li> {item.name}</li>
+            <li> {item.symbol}</li>
+            <li> {item.price}</li>
+          </ul>
         </div>
       ))}
     </div>
