@@ -27,29 +27,52 @@ const StockDetail = () => {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div>
+        Error:
+        {error.message}
+      </div>
+    );
   }
 
   return (
     <div className="stock-detail-container">
       <h2 className="stock-detail-heading">Company Profile</h2>
       <div className="stock-detail-item">
-        <p>Symbol: {companyProfile.symbol}</p>
+        <p>
+          Symbol:
+          {companyProfile.symbol}
+        </p>
       </div>
       <div className="stock-detail-item">
-        <p>Name: {companyProfile.companyName}</p>
+        <p>
+          Name:
+          {companyProfile.companyName}
+        </p>
       </div>
       <div className="stock-detail-item">
-        <p>Price: {companyProfile.price}</p>
+        <p>
+          Price:
+          {companyProfile.price}
+        </p>
       </div>
       <div className="stock-detail-item">
-        <p>Beta: {companyProfile.beta}</p>
+        <p>
+          Beta:
+          {companyProfile.beta}
+        </p>
       </div>
       <div className="stock-detail-item">
-        <p>Market Capitalization: {companyProfile.mktCap}</p>
+        <p>
+          Market Capitalization:
+          {companyProfile.mktCap}
+        </p>
       </div>
       <div className="stock-detail-item">
-        <p className="stock-detail-description">Description: {companyProfile.description}</p>
+        <p className="stock-detail-description">
+          Description:
+          {companyProfile.description}
+        </p>
       </div>
       {/* Add more details as needed */}
     </div>

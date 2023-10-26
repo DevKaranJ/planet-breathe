@@ -23,7 +23,7 @@ const stockDataSlice = createSlice({
       state.loading = false;
       state.error = {
         message: action.payload.message, // Store the error message
-        code: action.payload.code,       // Store any other relevant information
+        code: action.payload.code, // Store any other relevant information
       };
     },
   },
@@ -40,7 +40,7 @@ export const fetchStockDetail = (symbol) => async (dispatch) => {
   dispatch(fetchDataStart());
 
   try {
-    const response = await fetchStockData(symbol); // Modify fetchStockData to accept a symbol parameter
+    const response = await fetchStockData(symbol);
     dispatch(fetchDataSuccess(response));
   } catch (error) {
     dispatch(fetchDataFailure(error));

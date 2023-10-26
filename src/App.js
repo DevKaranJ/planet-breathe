@@ -13,7 +13,6 @@ function App() {
     // Add logic to switch between dark and light modes here
   };
 
-
   return (
     <Router>
       <div className={`App ${darkMode ? 'dark' : ''}`}>
