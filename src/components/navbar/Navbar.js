@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Switch } from 'antd';
-import { BellOutlined, SettingOutlined } from '@ant-design/icons';
+import { BellOutlined, SettingOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import './Navbar.scss';
 
 const { Header } = Layout;
@@ -8,6 +8,9 @@ const { Header } = Layout;
 const Navbar = ({ darkMode, toggleDarkMode }) => {
   return (
     <Header className="navbar">
+      <div className="left-menu">
+        <ArrowLeftOutlined className="back-arrow-icon" onClick={() => window.history.back()} />
+      </div>
       <div className="logo">
         <h1>Stock Screener</h1>
       </div>
