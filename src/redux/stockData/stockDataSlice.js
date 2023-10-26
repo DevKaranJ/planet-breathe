@@ -21,7 +21,10 @@ const stockDataSlice = createSlice({
     fetchDataFailure: (state, action) => {
       state.data = null;
       state.loading = false;
-      state.error = action.payload;
+      state.error = {
+        message: action.payload.message, // Store the error message
+        code: action.payload.code,       // Store any other relevant information
+      };
     },
   },
 });
