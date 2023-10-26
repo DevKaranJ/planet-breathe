@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchCompanyProfile } from '../../redux/stockData/stockApi';
+import './StockDetail.scss'; // Import the SCSS file
 
 const StockDetail = () => {
   const { symbol } = useParams();
@@ -30,14 +31,26 @@ const StockDetail = () => {
   }
 
   return (
-    <div>
-      <h2>Company Profile</h2>
-      <p>Symbol: {companyProfile.symbol}</p>
-      <p>Name: {companyProfile.companyName}</p>
-      <p>Price: {companyProfile.price}</p>
-      <p>Beta: {companyProfile.beta}</p>
-      <p>Market Capitalization: {companyProfile.mktCap}</p>
-      <p>Description: {companyProfile.description}</p>
+    <div className="stock-detail-container">
+      <h2 className="stock-detail-heading">Company Profile</h2>
+      <div className="stock-detail-item">
+        <p>Symbol: {companyProfile.symbol}</p>
+      </div>
+      <div className="stock-detail-item">
+        <p>Name: {companyProfile.companyName}</p>
+      </div>
+      <div className="stock-detail-item">
+        <p>Price: {companyProfile.price}</p>
+      </div>
+      <div className="stock-detail-item">
+        <p>Beta: {companyProfile.beta}</p>
+      </div>
+      <div className="stock-detail-item">
+        <p>Market Capitalization: {companyProfile.mktCap}</p>
+      </div>
+      <div className="stock-detail-item">
+        <p className="stock-detail-description">Description: {companyProfile.description}</p>
+      </div>
       {/* Add more details as needed */}
     </div>
   );
