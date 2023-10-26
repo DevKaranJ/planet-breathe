@@ -39,7 +39,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
   }, [searchQuery, stockData.data]);
 
   return (
-    <div className={`companyContainer ${darkMode ? 'dark' : ''}`}>
+    <div className="stockContainer">
       <div className="search-bar">
         <Input
           placeholder="Search by symbol..."
@@ -47,6 +47,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+    <div className={`companyContainer ${darkMode ? 'dark' : ''}`}>
       {filteredData.map((item, index) => (
         <div className={`company-card ${darkMode ? 'dark' : ''}`} key={index}>
           <ul className="company-info">
@@ -62,6 +63,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };
