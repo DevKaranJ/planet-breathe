@@ -1,34 +1,43 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchStockDetail } from '../../redux/stockData/stockDataSlice';
+import { fetchCompanyProfile } from '../../redux/stockData/stockApi';
 
 const StockDetail = () => {
-  const { symbol } = useParams(); // Get the symbol parameter from the URL
-  const stockData = useSelector((state) => state.stockData);
-  const dispatch = useDispatch();
+  const { symbol } = useParams();
+  const [companyProfile, setCompanyProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch the stock details when the component mounts
-    dispatch(fetchStockDetail(symbol));
-  }, [dispatch, symbol]);
+    // Fetch the company profile data when the component mounts
+    fetchCompanyProfile(symbol)
+      .then((data) => {
+        setCompanyProfile(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err);
+        setLoading(false);
+      });
+  }, [symbol]);
 
-  if (stockData.loading) {
+  if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (stockData.error) {
-    return <div>Error: {stockData.error.message}</div>;
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (
     <div>
-      <h2>Stock Detail</h2>
-      <p>Symbol: {stockData.data.symbol}</p>
-      <p>Name: {stockData.data.companyName}</p>
-      <p>Market Cap: {stockData.data.marketCap}</p>
-      <p>Sector: {stockData.data.sector}</p>
-      <p>Industry: {stockData.data.industry}</p>
+      <h2>Company Profile</h2>
+      <p>Symbol: {companyProfile.symbol}</p>
+      <p>Name: {companyProfile.companyName}</p>
+      <p>Price: {companyProfile.price}</p>
+      <p>Beta: {companyProfile.beta}</p>
+      <p>Market Capitalization: {companyProfile.mktCap}</p>
+      <p>Description: {companyProfile.description}</p>
       {/* Add more details as needed */}
     </div>
   );

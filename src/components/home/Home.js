@@ -37,10 +37,10 @@ const Home = () => {
             <li className="exchange">{item.exchangeShortName}</li>
           </ul>
           <div className="button-container">
-            <Link to={`/stock/${item.symbol}`}>
-              <Button type="text" icon={<RightOutlined />} className="view-details-button">
-              </Button>
-            </Link>
+          <Link to={`/stock/${item.symbol}`}>
+  <Button type="text" icon={<RightOutlined />} className="view-details-button">
+  </Button>
+</Link>
           </div>
         </div>
       ))}
