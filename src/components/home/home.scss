@@ -16,6 +16,14 @@ body {
   padding-top: 1rem;
 }
 
+.search-bar {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center; /* Center the search bar horizontally */
+  align-items: center;
+  width: 100%; /* Make the search bar full width */
+}
+
 .company-card {
   display: flex;
   flex-direction: column;
