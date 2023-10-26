@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
 
 .stock-detail-container {
+  display: flex;
+  flex-direction: column;
     padding: 20px;
     background-color: #0a0909;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 20px;
+    height: 100vh;
   }
   
   .stock-detail-heading {
@@ -28,3 +31,6 @@
     color: #555;
   }
   
+  .dark body {
+    background-color: #4768af;
+  }
