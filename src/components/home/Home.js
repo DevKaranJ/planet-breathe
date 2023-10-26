@@ -20,7 +20,6 @@ const Home = () => {
     try {
       const data = await fetchStockData();
       dispatch(fetchDataSuccess(data));
-      setFilteredData(data); // Initialize filteredData with all data
     } catch (error) {
       dispatch(fetchDataFailure(error));
     }
@@ -32,10 +31,12 @@ const Home = () => {
 
   useEffect(() => {
     // Filter data based on the searchQuery whenever it changes
-    const filtered = stockData.data.filter((item) =>
-      item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    setFilteredData(filtered);
+    if (stockData.data) {
+      const filtered = stockData.data.filter((item) =>
+        item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(filtered);
+    }
   }, [searchQuery, stockData.data]);
 
   return (
