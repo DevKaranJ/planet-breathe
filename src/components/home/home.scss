@@ -60,7 +60,7 @@ a {
   .company-card:nth-child(16n + 11),
   .company-card:nth-child(16n + 13),
   .company-card:nth-child(16n + 15) {
-    background-color: #fb5695
+    background-color: #fb5695;
   }
 
   .company-card:nth-child(16n + 1),
@@ -199,7 +199,9 @@ a {
   margin-bottom: 10px;
 }
 
-.symbol, .name, .exchange {
+.symbol,
+.name,
+.exchange {
   color: #fff; // Text color
 }
 
