@@ -220,3 +220,18 @@ a {
   color: #e84e89;
 }
 
+.dark body {
+  background-color: #4768af;
+}
+
+/* Dark mode styles */
+.dark .company-card {
+  background-color: #5c88e0;
+}
+
+.dark .company-card:nth-child(3n + 2),
+.dark .company-card:nth-child(3n + 5),
+.dark .company-card:nth-child(3n + 8),
+.dark .company-card:nth-child(3n + 11) {
+  background-color: #4361a1;
+}

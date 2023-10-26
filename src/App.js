@@ -20,7 +20,7 @@ function App() {
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <Routes>
           <Route path="/stock/:symbol" element={<StockDetail />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} />} />
         </Routes>
       </div>
     </Router>

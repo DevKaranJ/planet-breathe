@@ -2,3 +2,21 @@
   margin: 0;
   padding: 0;
 }
+// DarkMode.scss
+
+$darkModeColor: #4768af;
+
+.dark {
+  background-color: $darkModeColor;
+  color: white; // Text color in dark mode
+}
+
+// Example styles for specific elements
+.dark .navbar {
+  background-color: $darkModeColor;
+}
+
+.dark .button {
+  background-color: $darkModeColor;
+  color: white;
+}

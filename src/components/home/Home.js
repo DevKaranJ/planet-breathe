@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchDataStart, fetchDataSuccess, fetchDataFailure } from '../../redux/stockData/stockDataSlice';
 import { fetchStockData } from '../../redux/stockData/stockApi';
 import './home.scss';
-import { Button, Input } from 'antd'; // Import the Input and Button components from Ant Design
+import { Button, Input } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 
-const Home = () => {
+const Home = ({ darkMode, toggleDarkMode }) => {
   const stockData = useSelector((state) => state.stockData);
   const dispatch = useDispatch();
 
@@ -30,7 +30,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // Filter data based on the searchQuery whenever it changes
     if (stockData.data) {
       const filtered = stockData.data.filter((item) =>
         item.symbol.toLowerCase().includes(searchQuery.toLowerCase())
@@ -40,7 +39,7 @@ const Home = () => {
   }, [searchQuery, stockData.data]);
 
   return (
-    <div className="companyContainer">
+    <div className={`companyContainer ${darkMode ? 'dark' : ''}`}>
       <div className="search-bar">
         <Input
           placeholder="Search by symbol..."
@@ -49,7 +48,7 @@ const Home = () => {
         />
       </div>
       {filteredData.map((item, index) => (
-        <div className="company-card" key={index}>
+        <div className={`company-card ${darkMode ? 'dark' : ''}`} key={index}>
           <ul className="company-info">
             <li className="symbol">{item.symbol}</li>
             <li className="name">{item.name}</li>
