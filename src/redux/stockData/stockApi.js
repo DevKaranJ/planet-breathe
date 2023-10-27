@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'TjRFwBPIngDfqC6yB1xBcsY61HwrdcWk';
+const API_KEY = 'tecoH8GyGBzyoxKMebRn6cdvfoyjyDuc';
 
 const fetchStockData = async (symbol) => {
   try {
