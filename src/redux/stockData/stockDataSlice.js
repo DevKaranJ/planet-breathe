@@ -1,50 +1,60 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchStockData } from './stockApi';
+// stockDataSlice.js
+
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchStockData, fetchCompanyProfile } from './stockApi'; // Adjust the import path
+
+// Create an async thunk to fetch stock data
+export const fetchStockDataAsync = createAsyncThunk('stockData/fetchStockData', async (symbol) => {
+  const response = await fetchStockData(symbol);
+  return response;
+});
+
+export const fetchCompanyProfileAsync = createAsyncThunk('stockData/fetchCompanyProfile', async (symbol) => {
+  const response = await fetchCompanyProfile(symbol);
+  return response;
+});
 
 const stockDataSlice = createSlice({
   name: 'stockData',
   initialState: {
     data: null,
-    loading: false,
+    loading: 'idle', // 'idle' indicates no ongoing request
     error: null,
   },
-  reducers: {
-    fetchDataStart: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    fetchDataSuccess: (state, action) => {
-      state.data = action.payload;
-      state.loading = false;
-      state.error = null;
-    },
-    fetchDataFailure: (state, action) => {
-      state.data = null;
-      state.loading = false;
-      state.error = {
-        message: action.payload.message, // Store the error message
-        code: action.payload.code, // Store any other relevant information
-      };
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchStockDataAsync.pending, (state) => {
+        state.loading = 'pending'; // Set loading state to 'pending'
+        state.error = null;
+      })
+      .addCase(fetchStockDataAsync.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = 'succeeded'; // Set loading state to 'succeeded'
+        state.error = null;
+      })
+      .addCase(fetchStockDataAsync.rejected, (state, action) => {
+        state.loading = 'failed'; // Set loading state to 'failed'
+        state.error = action.error.message;
+      })
+      .addCase(fetchCompanyProfileAsync.pending, (state) => {
+        state.loading = 'pending';
+        state.error = null;
+      })
+      .addCase(fetchCompanyProfileAsync.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.loading = 'succeeded';
+        state.error = null;
+      })
+      .addCase(fetchCompanyProfileAsync.rejected, (state, action) => {
+        state.loading = 'failed';
+        state.error = action.error.message;
+      });
   },
 });
 
-export const {
-  fetchDataStart,
-  fetchDataSuccess,
-  fetchDataFailure,
-} = stockDataSlice.actions;
-
-// New action to fetch details for a specific stock
-export const fetchStockDetail = (symbol) => async (dispatch) => {
-  dispatch(fetchDataStart());
-
-  try {
-    const response = await fetchStockData(symbol);
-    dispatch(fetchDataSuccess(response));
-  } catch (error) {
-    dispatch(fetchDataFailure(error));
-  }
-};
+export const selectStockData = (state) => state.stockData.data;
+export const selectLoading = (state) => state.stockData.loading;
+export const selectError = (state) => state.stockData.error;
 
 export default stockDataSlice.reducer;

@@ -1,38 +1,36 @@
-import React, { useEffect, useState } from 'react';
+// StockDetail.js
+
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchCompanyProfile } from '../../redux/stockData/stockApi';
-import './StockDetail.scss'; // Import the SCSS file
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCompanyProfileAsync, selectStockData, selectLoading, selectError } from '../../redux/stockData/stockDataSlice';
+import './StockDetail.scss';
 
 const StockDetail = () => {
   const { symbol } = useParams();
-  const [companyProfile, setCompanyProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const companyProfile = useSelector(selectStockData);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
-  useEffect(() => {
-    // Fetch the company profile data when the component mounts
-    fetchCompanyProfile(symbol)
-      .then((data) => {
-        setCompanyProfile(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err);
-        setLoading(false);
-      });
-  }, [symbol]);
+  React.useEffect(() => {
+    dispatch(fetchCompanyProfileAsync(symbol)); // Dispatch the async action
+  }, [dispatch, symbol]);
 
-  if (loading) {
+  if (loading === 'pending') {
     return <div>Loading...</div>;
   }
 
   if (error) {
     return (
       <div>
-        Error:
-        {error.message}
+        Error: {error}
       </div>
     );
+  }
+
+  if (!companyProfile) {
+    return null; // Handle the case when companyProfile is not available
   }
 
   return (
@@ -40,38 +38,32 @@ const StockDetail = () => {
       <h2 className="stock-detail-heading">Company Profile</h2>
       <div className="stock-detail-item">
         <p>
-          Symbol:
-          {companyProfile.symbol}
+          Symbol: {companyProfile.symbol}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Name:
-          {companyProfile.companyName}
+          Name: {companyProfile.companyName}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Price:
-          {companyProfile.price}
+          Price: {companyProfile.price}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Beta:
-          {companyProfile.beta}
+          Beta: {companyProfile.beta}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Market Capitalization:
-          {companyProfile.mktCap}
+          Market Capitalization: {companyProfile.mktCap}
         </p>
       </div>
       <div className="stock-detail-item">
         <p className="stock-detail-description">
-          Description:
-          {companyProfile.description}
+          Description: {companyProfile.description}
         </p>
       </div>
       {/* Add more details as needed */}
