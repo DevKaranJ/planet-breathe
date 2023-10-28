@@ -70,7 +70,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://devkaranj.github.io/stock-watch/)
+- [Live Demo Link](https://stock-watch-s2ly.onrender.com)
 - [Live Demo Vedio]() 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
