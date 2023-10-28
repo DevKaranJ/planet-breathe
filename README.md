@@ -71,7 +71,7 @@
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 - [Live Demo Link](https://stock-watch-s2ly.onrender.com)
-- [Live Demo Vedio]() 
+- [Live Demo Vedio](https://www.loom.com/share/4054f31bceb6464fa1dbabb7207989eb?sid=91b19346-a1fe-4212-b305-01e10acc0c54) 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
