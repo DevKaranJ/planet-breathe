@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { RightOutlined } from '@ant-design/icons';
+import { Button, Input } from 'antd'; // Add this import
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -11,11 +11,13 @@ import {
   selectError,
 } from '../../redux/stockData/stockDataSlice';
 import './home.scss';
+import SearchBar from './SearchBar';
+
+// ... Rest of the code ...
 
 const API_CALLS_LIMIT = 250; // Set your daily API call limit
 
 const Home = ({ darkMode, toggleDarkMode }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [apiCallsCount, setApiCallsCount] = useState(0);
 
   const dispatch = useDispatch();
@@ -23,14 +25,14 @@ const Home = ({ darkMode, toggleDarkMode }) => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
-  const handleFetchData = async () => {
+  const handleFetchData = async (searchQuery) => {
     if (apiCallsCount >= API_CALLS_LIMIT) {
       // Notify the user that the API limit has been reached
       alert('API call limit for the day has been reached.');
       return;
     }
 
-    dispatch(fetchStockDataAsync(searchQuery));
+    dispatch(fetchStockDataAsync(searchQuery)); // Add a closing parenthesis here
 
     // Increment the API call count
     setApiCallsCount(apiCallsCount + 1);
@@ -38,29 +40,23 @@ const Home = ({ darkMode, toggleDarkMode }) => {
 
   useEffect(() => {
     // Fetch initial data when the component loads
-    handleFetchData();
+    handleFetchData('');
   }, []);
 
   return (
     <div className="stockContainer">
-      <div className="search-bar">
-        <Input
-          placeholder="Search by symbol..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <Button onClick={handleFetchData}>Search</Button>
-      </div>
+      <SearchBar onSearch={handleFetchData} />
       <div className={`companyContainer ${darkMode ? 'dark' : ''}`}>
         {loading === 'pending' && <div>Loading...</div>}
         {error && (
-        <div>
-          Error:
-          {error}
-        </div>
+          <div>
+            Error:
+            {' '}
+            {error}
+          </div>
         )}
         {loading === 'succeeded' && Array.isArray(stockData) && stockData.length > 0 ? (
-        // Display the data here
+          // Display the data here
           stockData.map((item) => (
             <div className={`company-card ${darkMode ? 'dark' : ''}`} key={item.symbol}>
               <ul className="company-info">
@@ -76,7 +72,7 @@ const Home = ({ darkMode, toggleDarkMode }) => {
             </div>
           ))
         ) : (
-        // Handle the case when stockData is not an array or is empty
+          // Handle the case when stockData is not an array or is empty
           <div>No stock data available.</div>
         )}
       </div>
