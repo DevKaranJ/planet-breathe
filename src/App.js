@@ -11,7 +11,7 @@ function App() {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     // Add logic to switch between dark and light modes here
-  }
+  };
 
   return (
     <Router>

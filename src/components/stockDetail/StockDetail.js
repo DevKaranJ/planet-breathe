@@ -3,7 +3,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCompanyProfileAsync, selectStockData, selectLoading, selectError } from '../../redux/stockData/stockDataSlice';
+import {
+  fetchCompanyProfileAsync, selectStockData, selectLoading, selectError,
+} from '../../redux/stockData/stockDataSlice';
 import './StockDetail.scss';
 
 const StockDetail = () => {
@@ -24,7 +26,9 @@ const StockDetail = () => {
   if (error) {
     return (
       <div>
-        Error: {error}
+        Error:
+        {' '}
+        {error}
       </div>
     );
   }
@@ -38,32 +42,44 @@ const StockDetail = () => {
       <h2 className="stock-detail-heading">Company Profile</h2>
       <div className="stock-detail-item">
         <p>
-          Symbol: {companyProfile.symbol}
+          Symbol:
+          {' '}
+          {companyProfile.symbol}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Name: {companyProfile.companyName}
+          Name:
+          {' '}
+          {companyProfile.companyName}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Price: {companyProfile.price}
+          Price:
+          {' '}
+          {companyProfile.price}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Beta: {companyProfile.beta}
+          Beta:
+          {' '}
+          {companyProfile.beta}
         </p>
       </div>
       <div className="stock-detail-item">
         <p>
-          Market Capitalization: {companyProfile.mktCap}
+          Market Capitalization:
+          {' '}
+          {companyProfile.mktCap}
         </p>
       </div>
       <div className="stock-detail-item">
         <p className="stock-detail-description">
-          Description: {companyProfile.description}
+          Description:
+          {' '}
+          {companyProfile.description}
         </p>
       </div>
       {/* Add more details as needed */}

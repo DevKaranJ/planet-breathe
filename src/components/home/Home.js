@@ -53,9 +53,14 @@ const Home = ({ darkMode, toggleDarkMode }) => {
       </div>
       <div className={`companyContainer ${darkMode ? 'dark' : ''}`}>
         {loading === 'pending' && <div>Loading...</div>}
-        {error && <div>Error: {error}</div>}
-        {loading === 'succeeded' && (
-          // Display the data here
+        {error && (
+        <div>
+          Error:
+          {error}
+        </div>
+        )}
+        {loading === 'succeeded' && Array.isArray(stockData) && stockData.length > 0 ? (
+        // Display the data here
           stockData.map((item) => (
             <div className={`company-card ${darkMode ? 'dark' : ''}`} key={item.symbol}>
               <ul className="company-info">
@@ -70,6 +75,9 @@ const Home = ({ darkMode, toggleDarkMode }) => {
               </div>
             </div>
           ))
+        ) : (
+        // Handle the case when stockData is not an array or is empty
+          <div>No stock data available.</div>
         )}
       </div>
     </div>
